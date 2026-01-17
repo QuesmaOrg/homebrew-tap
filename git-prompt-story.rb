@@ -5,21 +5,21 @@
 class GitPromptStory < Formula
   desc "Git commit prompt generator using AI to create meaningful commit messages"
   homepage "https://github.com/QuesmaOrg/git-prompt-story"
-  version "0.15.3"
+  version "0.16.0"
   license "Apache-2.0"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/QuesmaOrg/git-prompt-story/releases/download/v0.15.3/git-prompt-story_darwin_amd64.tar.gz"
-      sha256 "06a280a2ddfcf66555cf58e60544059dfd91dca8a8dca43678a2129e37a7c5e7"
+      url "https://github.com/QuesmaOrg/git-prompt-story/releases/download/v0.16.0/git-prompt-story_darwin_amd64.tar.gz"
+      sha256 "fe1ef102e944d743f2f031c83dd4c37aeeb978aeeb55d8861f42405bfa980527"
 
       def install
         bin.install "git-prompt-story"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/QuesmaOrg/git-prompt-story/releases/download/v0.15.3/git-prompt-story_darwin_arm64.tar.gz"
-      sha256 "3684d27c4c01b3e33182d6a8dbf9359d646a71fc34c97542bb4fed611d20bc38"
+      url "https://github.com/QuesmaOrg/git-prompt-story/releases/download/v0.16.0/git-prompt-story_darwin_arm64.tar.gz"
+      sha256 "94088a99ee35595be340890707016d6b7656879cbe13a9b4c463f569e8b1262a"
 
       def install
         bin.install "git-prompt-story"
@@ -29,15 +29,15 @@ class GitPromptStory < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/QuesmaOrg/git-prompt-story/releases/download/v0.15.3/git-prompt-story_linux_amd64.tar.gz"
-      sha256 "8074494e3f43027425efdaab8ed37313f068e9a42b7fabfe8f6e5f0bbfe7a05c"
+      url "https://github.com/QuesmaOrg/git-prompt-story/releases/download/v0.16.0/git-prompt-story_linux_amd64.tar.gz"
+      sha256 "29948f41ee0dbeb4887f07d0ca0beb5a373da9a1ac8c3896ffaefc975883c1ca"
       def install
         bin.install "git-prompt-story"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/QuesmaOrg/git-prompt-story/releases/download/v0.15.3/git-prompt-story_linux_arm64.tar.gz"
-      sha256 "a973330965babefa20e89b67b393ccba8ccc1fab11d6eb7dc193337a7318fb7a"
+      url "https://github.com/QuesmaOrg/git-prompt-story/releases/download/v0.16.0/git-prompt-story_linux_arm64.tar.gz"
+      sha256 "8247643a22cd88690e684e6a2687abae200c05464c56edb4a7c6e294ecdf0b8f"
       def install
         bin.install "git-prompt-story"
       end
