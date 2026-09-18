@@ -1,0 +1,50 @@
+name: Update Quesma Shipper
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "23 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-quesma-shipper
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+
+      - name: Check release import rules
+        run: python3 -m unittest discover -s scripts -p 'test_*.py'
+
+      - name: Fetch the cask attached to the latest shipper release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api repos/QuesmaOrg/quesma-shipper/releases/latest > "$RUNNER_TEMP/release.json"
+          if ! jq -e '.assets[] | select(.name == "quesma-shipper.rb")' "$RUNNER_TEMP/release.json" >/dev/null; then
+            echo 'The latest release predates Homebrew support; waiting for the first compatible release.'
+            exit 0
+          fi
+          version=$(jq -r .tag_name "$RUNNER_TEMP/release.json")
+          gh release download "$version" --repo QuesmaOrg/quesma-shipper \
+            --pattern quesma-shipper.rb --dir "$RUNNER_TEMP"
+          python3 scripts/update-shipper.py "$RUNNER_TEMP/release.json" "$RUNNER_TEMP/quesma-shipper.rb"
+
+      - name: Commit the cask update
+        run: |
+          if [[ ! -f Casks/quesma-shipper.rb ]]; then exit 0; fi
+          ruby -c Casks/quesma-shipper.rb
+          git add Casks/quesma-shipper.rb
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Update Quesma Shipper cask'
+          git push origin HEAD:main
