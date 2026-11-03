@@ -1,9 +1,9 @@
 cask "quesma-shipper" do
   arch arm: "arm64", intel: "amd64"
 
-  version "0.0.3-90.78bdc07ccd48"
-  sha256 arm:   "92ec6bf9e00c0ea6979cb2cfd4d76da89d163b8b3bece5558865d15b21f974c2",
-         intel: "5c4821bfcfb3f653f6cc056f09e1c674c50f99c9067643dd389d03708e09a1e3"
+  version "0.0.3-110.fd0d54071a7e"
+  sha256 arm:   "96040d4a819686c1dd60809f91de4fe9e388e10da615ec850ff1dea257806cf2",
+         intel: "698de8b0dda39e487096f7679dff341bf11fee47ba20e0cdaed648564e78145d"
 
   url "https://updates.quesma.dev/targets/#{sha256}.quesma-shipper-darwin-#{arch}"
   name "Quesma Shipper"
